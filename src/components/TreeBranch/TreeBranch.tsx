@@ -113,21 +113,6 @@ export const TreeBranch: React.FC<Props> = ({
               </Button>
             )}
 
-            {/* <div
-              style={{
-                border: '1px solid black',
-              }}
-              className="p-2 border rounded"
-            >
-              {root ? (
-                <h3>
-                  <strong>{node.name}</strong>
-                </h3>
-              ) : (
-                <h5>{node.name}</h5>
-              )}
-            </div> */}
-
             <div
               style={{
                 border: '1px solid black',

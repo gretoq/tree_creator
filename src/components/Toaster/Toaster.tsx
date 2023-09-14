@@ -25,6 +25,7 @@ export const Toaster: React.FC<Props> = ({ show, toastBody, onClose }) => {
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">{title}</strong>
         </Toast.Header>
+
         <Toast.Body>{description}</Toast.Body>
       </Toast>
     </ToastContainer>
