@@ -10,25 +10,40 @@ This is a web application built with React that allows users to create and visua
 
 ## Key Features
 
-- Creation of a tree root using the "Create Root" button.
+### - Creation of a tree root using the "Create Root" button.
 
-<video width="320" height="240" controls>
-  <source src="./public/videos/create_root.webm" type="video/webm">
+<video width="640" height="480" controls>
+  <source src="public/videos/create_root.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-<video width="320" height="240" controls>
-  <source src="https://watch.screencastify.com/v/68uusq68nSQrxcrMwdN7" type="video/webm">
+### - Addition of new nodes (branches) to existing nodes.
+
+<video width="640" height="480" controls>
+  <source src="public/videos/add_branches.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-[create_root.webm](https://github.com/gretoq/internet_tv/assets/104682987/8aca182f-a3df-4bd6-9ac8-eab9deafcb9b)
-[create_root.webm](public/videos/create_root.webm)
+### - Deletion of nodes and their sub-trees.
 
-- Addition of new nodes (branches) to existing nodes.
-- Deletion of nodes and their sub-trees.
-- Storage of the tree structure in local storage (localStorage).
-- Editing of node names.
+<video width="640" height="480" controls>
+  <source src="public/videos/delete_branches.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### - Storage of the tree structure in local storage (localStorage).
+
+<video width="640" height="480" controls>
+  <source src="public/videos/store.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### - Editing of node names.
+
+<video width="640" height="480" controls>
+  <source src="public/videos/edit.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Technologies and Libraries Used
 
