@@ -1,10 +1,15 @@
-import { ILocalKeys, INode, IRoot } from '../../types';
-import { getBranchById } from '../../utils/helpers';
+import { ILocalKeys } from '../../types';
+import { loadFromLocalStorage } from '../../utils/localStorage';
 import {
-  loadFromLocalStorage,
-  removeFromLocalStorage,
-  updateLocalStorage,
-} from '../../utils/localStorage';
+  addBranchToBranch,
+  addBranchToRoot,
+  createRoot,
+  editBranchName,
+  editRootName,
+  removeBranchFromBranch,
+  removeBranchFromRoot,
+  removeRoot,
+} from './controllers';
 import { Action, RootActions, State } from './types';
 
 const initialState: State = {
@@ -15,18 +20,9 @@ export const rootReducer = (
   state: State = initialState,
   action: Action,
 ): State => {
-  let updatedRoot: IRoot;
-  let updatedState: State;
-  let foundedBranch: INode | null;
-
   switch (action.type) {
     case RootActions.CREATE:
-      updatedRoot = action.payload;
-      updatedState = { root: updatedRoot };
-
-      updateLocalStorage(ILocalKeys.ROOT, updatedRoot);
-
-      return updatedState;
+      return createRoot(action.payload);
 
     case RootActions.ADD_BRANCH:
       if (!state.root) {
@@ -34,81 +30,50 @@ export const rootReducer = (
       }
 
       if (!action.payload.id) {
-        updatedRoot = {
-          ...state.root,
-          branches: [...(state.root.branches || []), action.payload.node],
-        };
-
-        updatedState = {
-          root: updatedRoot,
-        };
-
-        updateLocalStorage(ILocalKeys.ROOT, updatedRoot);
-
-        return updatedState;
+        return addBranchToRoot(action.payload.branch, state.root);
       }
 
-      updatedState = JSON.parse(JSON.stringify(state));
+      return addBranchToBranch(
+        action.payload.id,
+        action.payload.branch,
+        state.root,
+      );
 
-      if (!updatedState.root) {
+    case RootActions.EDIT_ROOT_NAME:
+      if (!state.root) {
         return state;
       }
 
-      foundedBranch = getBranchById(
-        action.payload.id,
-        updatedState.root.branches,
+      return editRootName(action.payload, state.root);
+
+    case RootActions.EDIT_BRANCH_NAME:
+      if (!state.root) {
+        return state;
+      }
+
+      return editBranchName(
+        action.payload.name,
+        action.payload.branchId,
+        state.root,
       );
 
-      foundedBranch?.branches.push(action.payload.node);
-
-      updatedRoot = updatedState.root;
-
-      updateLocalStorage(ILocalKeys.ROOT, updatedRoot);
-
-      return updatedState;
-
     case RootActions.DELETE_BRANCH:
-      updatedState = JSON.parse(JSON.stringify(state));
-
-      if (!updatedState.root) {
+      if (!state.root) {
         return state;
       }
 
       if (!action.payload.parentId) {
-        updatedRoot = updatedState.root;
-
-        updatedState.root.branches = updatedRoot.branches.filter(
-          ({ id }) => id !== action.payload.id,
-        );
-
-        updateLocalStorage(ILocalKeys.ROOT, updatedRoot);
-
-        return updatedState;
+        return removeBranchFromRoot(action.payload.id, state.root);
       }
 
-      foundedBranch = getBranchById(
+      return removeBranchFromBranch(
         action.payload.parentId,
-        updatedState.root?.branches,
+        action.payload.id,
+        state.root,
       );
-
-      if (!foundedBranch) {
-        return state;
-      }
-
-      foundedBranch.branches = foundedBranch.branches.filter(
-        ({ id }) => id !== action.payload.id,
-      );
-
-      updatedRoot = updatedState.root;
-
-      updateLocalStorage(ILocalKeys.ROOT, updatedRoot);
-
-      return updatedState;
 
     case RootActions.DELETE:
-      removeFromLocalStorage(ILocalKeys.ROOT);
-
-      return { root: null };
+      return removeRoot();
 
     default:
       return state;

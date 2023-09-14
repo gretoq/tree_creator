@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { actions, selectRoot } from '../../redux/root';
-import { INode, IToast } from '../../types';
+import { IBranch, IToast } from '../../types';
 import { ConfirmModal } from '../ConfirmModal';
 import { CreateModal } from '../CreateModal';
 import { MainButton } from '../MainButton';
@@ -16,11 +16,14 @@ export const Tree = () => {
 
   const [name, setName] = useState('');
 
-  const [showToast, setShowToast] = useState(false);
   const [toastBody, setToastBody] = useState<IToast | null>(null);
 
   const [openCreateBranchModal, setOpenCreateBranchModal] = useState(false);
   const [openConfirmDeleteBranch, setOpenConfirmDeleteBranch] = useState(false);
+
+  const [openConfirmEditRoot, setOpenConfirmEdiRoot] = useState(false);
+
+  const [openConfirmEditBranch, setOpenConfirmEdiBranch] = useState(false);
 
   const [currentBranchId, setCurrentBranchId] = useState<string>('');
   const [parentBranchId, setParentBranchId] = useState<string>('');
@@ -85,9 +88,6 @@ export const Tree = () => {
         description: 'Name of root is required!',
         danger: true,
       });
-
-      setShowToast(true);
-
       setOpenCreateRootModal(false);
 
       return;
@@ -108,8 +108,6 @@ export const Tree = () => {
       title: 'Successful',
       description: 'New Root is created!',
     });
-
-    setShowToast(true);
   };
 
   const handleDeleteRoot = () => {
@@ -121,8 +119,6 @@ export const Tree = () => {
       title: 'Successful',
       description: 'Root is deleted!',
     });
-
-    setShowToast(true);
   };
 
   const handleAddBranch = () => {
@@ -132,9 +128,6 @@ export const Tree = () => {
         description: 'Name of branch is required!',
         danger: true,
       });
-
-      setShowToast(true);
-
       setOpenCreateRootModal(false);
 
       return;
@@ -142,7 +135,7 @@ export const Tree = () => {
 
     const id = uuidv4();
 
-    const newBranch: INode = {
+    const newBranch: IBranch = {
       id,
       name,
       branches: [],
@@ -156,9 +149,6 @@ export const Tree = () => {
       title: 'Successful',
       description: 'New Branch is added!',
     });
-
-    setShowToast(true);
-
     setName('');
 
     setParentBranchId('');
@@ -171,9 +161,6 @@ export const Tree = () => {
         description: 'Oops.. Something went wrong, please try again later!',
         danger: true,
       });
-
-      setShowToast(true);
-
       setOpenConfirmDeleteBranch(false);
 
       return;
@@ -187,15 +174,76 @@ export const Tree = () => {
       title: 'Successful',
       description: 'Branch is deleted!',
     });
-
-    setShowToast(true);
-
     setCurrentBranchId('');
     setParentBranchId('');
   };
 
   const handleCloseToast = () => {
-    setShowToast(false);
+    setToastBody(null);
+  };
+
+  const handleOpenEditConfirm = (newName: string, branchId?: string) => {
+    if (!branchId) {
+      setName(newName);
+
+      setOpenConfirmEdiRoot(true);
+
+      return;
+    }
+
+    if (branchId) {
+      setName(newName);
+
+      setCurrentBranchId(branchId);
+
+      setOpenConfirmEdiBranch(true);
+    }
+  };
+
+  const handleCloseConfirmEditRoot = () => {
+    setOpenConfirmEdiRoot(false);
+
+    setName('');
+  };
+
+  const handleCloseConfirmEditBranch = () => {
+    setOpenConfirmEdiBranch(false);
+
+    setName('');
+  };
+
+  const handleEditRootName = () => {
+    if (!name) {
+      return;
+    }
+
+    dispatch(actions.editRootName(name));
+
+    setToastBody({
+      title: 'Successful',
+      description: 'Root name is changed!',
+    });
+
+    setOpenConfirmEdiRoot(false);
+
+    setName('');
+  };
+
+  const handleEditBranchName = () => {
+    if (!name) {
+      return;
+    }
+
+    dispatch(actions.editBranchName(name, currentBranchId));
+
+    setToastBody({
+      title: 'Successful',
+      description: 'Branch name is changed!',
+    });
+
+    setOpenConfirmEdiBranch(false);
+
+    setName('');
   };
 
   return (
@@ -234,6 +282,20 @@ export const Tree = () => {
         onOk={handleDeleteBranch}
       />
 
+      <ConfirmModal
+        open={openConfirmEditRoot}
+        onClose={handleCloseConfirmEditRoot}
+        title="Are you sure you want change the root name?"
+        onOk={handleEditRootName}
+      />
+
+      <ConfirmModal
+        open={openConfirmEditBranch}
+        onClose={handleCloseConfirmEditBranch}
+        title="Are you sure you want change the branch name?"
+        onOk={handleEditBranchName}
+      />
+
       {!root && <h2 className="mb-3">Let`s create a Root</h2>}
 
       <div className="mb-4">
@@ -251,12 +313,13 @@ export const Tree = () => {
           root={root}
           addNode={handleOpenCreateBranchModal}
           removeBranch={hadnleOpenConfirmDeleteNode}
+          onEditName={handleOpenEditConfirm}
         />
       )}
 
       {toastBody && (
         <Toaster
-          show={showToast}
+          show={!!toastBody}
           toastBody={toastBody}
           onClose={handleCloseToast}
         />

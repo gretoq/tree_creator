@@ -1,8 +1,10 @@
-import { INode, IRoot } from '../../types';
+import { IBranch, IRoot } from '../../types';
 
 export enum RootActions {
   CREATE = 'root/CREATE',
   ADD_BRANCH = 'root/ADD_BRANCH',
+  EDIT_ROOT_NAME = 'root/EDIT_ROOT_NAME',
+  EDIT_BRANCH_NAME = 'root/EDIT_BRANCH_NAME',
   DELETE_BRANCH = 'root/DELETE_BRANCH',
   DELETE = 'root/DELETE',
 }
@@ -15,8 +17,21 @@ export type CreateAction = {
 export type AddBranchAction = {
   type: RootActions.ADD_BRANCH;
   payload: {
-    node: INode;
+    branch: IBranch;
     id?: string;
+  };
+};
+
+export type EditRootName = {
+  type: RootActions.EDIT_ROOT_NAME;
+  payload: string;
+};
+
+export type EditBranchName = {
+  type: RootActions.EDIT_BRANCH_NAME;
+  payload: {
+    name: string;
+    branchId: string;
   };
 };
 
@@ -35,6 +50,8 @@ export type DeleteRootAction = {
 export type Action =
   | CreateAction
   | AddBranchAction
+  | EditRootName
+  | EditBranchName
   | DeleteBranchAction
   | DeleteRootAction;
 
