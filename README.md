@@ -12,23 +12,24 @@ This is a web application built with React that allows users to create and visua
 
 ### - Creation of a tree root using the "Create Root" button.
 
-https://github.com/gretoq/tree_creator/assets/104682987/baa8f522-b492-4344-b4b4-615ddf81fa91
+https://github.com/gretoq/tree_creator/assets/104682987/5564d262-dbf3-4054-ae4b-ae8d5c6f2902
 
 ### - Addition of new nodes (branches) to existing nodes.
 
-https://github.com/gretoq/tree_creator/assets/104682987/44bf6ec7-767a-4c2a-a8b8-253b023743ca
+
+https://github.com/gretoq/tree_creator/assets/104682987/2273c3b7-26f9-4b1a-9bb0-07da50862bef
 
 ### - Deletion of nodes and their sub-trees.
 
-https://github.com/gretoq/tree_creator/assets/104682987/33fc5b27-7b3e-4fb9-a5f4-7839af6040d4
+https://github.com/gretoq/tree_creator/assets/104682987/13188d56-a2d9-4497-a93e-e27e5c4c1a2b
 
 ### - Storage of the tree structure in local storage (localStorage).
 
-https://github.com/gretoq/tree_creator/assets/104682987/e1eb9463-5f00-412f-8a0d-e5213854bf7d
+https://github.com/gretoq/tree_creator/assets/104682987/19250e34-6231-4d15-a7e5-9289aaa0d83a
 
 ### - Editing of node names.
 
-https://github.com/gretoq/tree_creator/assets/104682987/795923f6-ddd3-46fc-ba73-d4503dad6297
+https://github.com/gretoq/tree_creator/assets/104682987/8ea7b873-2702-4bd5-a6d7-69a85b89199b
 
 ## Technologies and Libraries Used
 
