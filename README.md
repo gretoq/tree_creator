@@ -1,4 +1,4 @@
-# Tree Visualization Web App
+# Tree Visualization Web App [DEMO LINK](https://tree-creator-gretoq.vercel.app/)
 
 This is a web application built with React that allows users to create and visualize the structure of text nodes in a tree-like hierarchy. Users can add new nodes (roots) and delete existing ones.
 
@@ -12,38 +12,23 @@ This is a web application built with React that allows users to create and visua
 
 ### - Creation of a tree root using the "Create Root" button.
 
-<video width="640" height="480" controls>
-  <source src="public/videos/create_root.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/gretoq/tree_creator/assets/104682987/baa8f522-b492-4344-b4b4-615ddf81fa91
 
 ### - Addition of new nodes (branches) to existing nodes.
 
-<video width="640" height="480" controls>
-  <source src="public/videos/add_branches.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/gretoq/tree_creator/assets/104682987/44bf6ec7-767a-4c2a-a8b8-253b023743ca
 
 ### - Deletion of nodes and their sub-trees.
 
-<video width="640" height="480" controls>
-  <source src="public/videos/delete_branches.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/gretoq/tree_creator/assets/104682987/33fc5b27-7b3e-4fb9-a5f4-7839af6040d4
 
 ### - Storage of the tree structure in local storage (localStorage).
 
-<video width="640" height="480" controls>
-  <source src="public/videos/store.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/gretoq/tree_creator/assets/104682987/e1eb9463-5f00-412f-8a0d-e5213854bf7d
 
 ### - Editing of node names.
 
-<video width="640" height="480" controls>
-  <source src="public/videos/edit.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/gretoq/tree_creator/assets/104682987/795923f6-ddd3-46fc-ba73-d4503dad6297
 
 ## Technologies and Libraries Used
 
