@@ -13,7 +13,7 @@ export const Toaster: React.FC<Props> = ({ show, toastBody, onClose }) => {
   const { danger, title, description } = toastBody;
 
   return (
-    <ToastContainer className="p-3" position="top-end" style={{ zIndex: 1 }}>
+    <ToastContainer className="p-3" position="bottom-end" style={{ zIndex: 1 }}>
       <Toast
         show={show}
         onClose={onClose}

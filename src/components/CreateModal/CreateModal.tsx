@@ -51,6 +51,7 @@ export const CreateModal: React.FC<Props> = ({
           </Form.Group>
         </Form>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
           Close

@@ -1,9 +1,9 @@
-import { INode } from '../types';
+import { IBranch, IRoot } from '../types';
 
 export const getBranchById = (
   id: string,
-  rootBranches: INode[],
-): INode | null => {
+  rootBranches: IBranch[],
+): IBranch | null => {
   for (const branch of rootBranches) {
     if (branch.id === id) {
       return branch;
@@ -19,4 +19,10 @@ export const getBranchById = (
   }
 
   return null;
+};
+
+export const getCopyRoot = (root: IRoot): IRoot => {
+  const copyRoot = JSON.parse(JSON.stringify(root));
+
+  return copyRoot;
 };

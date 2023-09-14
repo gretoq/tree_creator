@@ -4,13 +4,13 @@ export enum ILocalKeys {
 
 export interface IRoot {
   name: string;
-  branches: INode[];
+  branches: IBranch[];
 }
 
-export interface INode {
+export interface IBranch {
   readonly id: string;
   name: string;
-  branches: INode[];
+  branches: IBranch[];
 }
 
 export interface IToast {
